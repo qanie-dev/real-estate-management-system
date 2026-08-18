@@ -60,7 +60,7 @@ export default function Navbar() {
     };
   }, []);
 
-  /* ================= CLOSE MOBILE ================= */
+  /* ================= CLOSE MOBILE MENU ================= */
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
@@ -91,7 +91,7 @@ export default function Navbar() {
 
         <div className="flex min-h-[76px] items-center justify-between">
 
-          {/* LOGO */}
+          {/* ================= LOGO ================= */}
 
           <Link
             href="/"
@@ -138,9 +138,10 @@ export default function Navbar() {
                 Home
               </Link>
 
-              {/* PROPERTIES */}
+              {/* ================= PROPERTIES ================= */}
 
               <div className="relative">
+
                 <button
                   type="button"
                   onClick={() =>
@@ -211,9 +212,10 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* SERVICES */}
+              {/* ================= SERVICES ================= */}
 
               <div className="relative">
+
                 <button
                   type="button"
                   onClick={() =>
@@ -315,6 +317,7 @@ export default function Navbar() {
               >
                 Contact
               </Link>
+
             </nav>
 
             {/* ENQUIRE */}
@@ -326,9 +329,10 @@ export default function Navbar() {
               Enquire Now
               <ArrowRight size={18} />
             </Link>
+
           </div>
 
-          {/* ================= MOBILE BUTTON ================= */}
+          {/* ================= MOBILE MENU BUTTON ================= */}
 
           <button
             type="button"
@@ -346,19 +350,20 @@ export default function Navbar() {
               <Menu size={28} />
             )}
           </button>
+
         </div>
 
         {/* ================= MOBILE MENU ================= */}
 
         {mobileOpen && (
-          <div className="relative max-h-[calc(100vh-76px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
+          <div className="relative z-[60] max-h-[calc(100vh-76px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
 
             {/* HOME */}
 
             <Link
               href="/"
               onClick={closeMobileMenu}
-              className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
+              className="relative z-10 block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               Home
             </Link>
@@ -395,11 +400,12 @@ export default function Navbar() {
               </button>
 
               {mobileDropdown === "properties" && (
-                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+                <div className="relative z-[70] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+
                   <Link
                     href="/properties"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     All Properties
                   </Link>
@@ -407,7 +413,7 @@ export default function Navbar() {
                   <Link
                     href="/properties/houses"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     Houses
                   </Link>
@@ -415,7 +421,7 @@ export default function Navbar() {
                   <Link
                     href="/properties/apartments"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     Apartments
                   </Link>
@@ -423,7 +429,7 @@ export default function Navbar() {
                   <Link
                     href="/properties/plots"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     Plots
                   </Link>
@@ -431,10 +437,11 @@ export default function Navbar() {
                   <Link
                     href="/properties/commercial"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     Commercial
                   </Link>
+
                 </div>
               )}
             </div>
@@ -471,11 +478,12 @@ export default function Navbar() {
               </button>
 
               {mobileDropdown === "services" && (
-                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+                <div className="relative z-[70] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+
                   <Link
                     href="/services"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     All Services
                   </Link>
@@ -483,7 +491,7 @@ export default function Navbar() {
                   <Link
                     href="/services/buy"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     Buy Property
                   </Link>
@@ -491,7 +499,7 @@ export default function Navbar() {
                   <Link
                     href="/services/sell"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     Sell Property
                   </Link>
@@ -499,10 +507,11 @@ export default function Navbar() {
                   <Link
                     href="/services/rent"
                     onClick={closeMobileMenu}
-                    className="block w-full py-3 text-sm text-gray-700"
+                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
                   >
                     Rent Property
                   </Link>
+
                 </div>
               )}
             </div>
@@ -512,7 +521,7 @@ export default function Navbar() {
             <Link
               href="/projects"
               onClick={closeMobileMenu}
-              className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
+              className="relative z-10 block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               Projects
             </Link>
@@ -522,7 +531,7 @@ export default function Navbar() {
             <Link
               href="/about"
               onClick={closeMobileMenu}
-              className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
+              className="relative z-10 block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               About Us
             </Link>
@@ -532,7 +541,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={closeMobileMenu}
-              className="block w-full py-4 text-left font-medium text-gray-700"
+              className="relative z-10 block w-full py-4 text-left font-medium text-gray-700"
             >
               Contact
             </Link>
@@ -542,7 +551,7 @@ export default function Navbar() {
             <Link
               href="/enquire"
               onClick={closeMobileMenu}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1E3D] px-4 py-3.5 font-semibold text-white"
+              className="relative z-10 mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1E3D] px-4 py-3.5 font-semibold text-white"
             >
               Enquire Now
               <ArrowRight size={18} />
@@ -550,6 +559,7 @@ export default function Navbar() {
 
           </div>
         )}
+
       </div>
     </header>
   );
