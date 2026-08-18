@@ -410,11 +410,14 @@ export default function Navbar() {
     </a>
 
     <a
-      href="/properties/houses"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      Houses
-    </a>
+  href="/properties/houses"
+  onTouchStart={() => {
+    window.location.href = "/properties/houses";
+  }}
+  className="block w-full py-4 text-sm text-gray-700"
+>
+  Houses
+</a>
 
     <a
       href="/properties/apartments"
