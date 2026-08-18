@@ -43,3 +43,5 @@ next-env.d.ts
 /app/generated/prisma
 # Prisma generated client
 /lib/generated/prisma
+
+*.dump
