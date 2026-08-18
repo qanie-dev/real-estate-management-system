@@ -368,80 +368,49 @@ export default function Navbar() {
               Home
             </Link>
 
-            {/* ================= PROPERTIES ================= */}
+            {/* ================= PROPERTIES (REPLACED) ================= */}
 
             <div className="border-b border-gray-100">
+              <div className="py-4 font-medium text-gray-700">
+                Properties
+              </div>
 
-              <button
-                type="button"
-                onClick={() =>
-                  toggleMobileDropdown("properties")
-                }
-                className="flex w-full items-center justify-between py-4 font-medium text-gray-700"
-              >
-                <span
-                  className={
-                    pathname.startsWith("/properties")
-                      ? "text-[#C79A54]"
-                      : ""
-                  }
+              <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+                <a
+                  href="/properties"
+                  className="block py-4 text-sm text-red-600"
                 >
-                  Properties
-                </span>
+                  All Properties
+                </a>
 
-                <ChevronDown
-                  size={18}
-                  className={`transition-transform ${
-                    mobileDropdown === "properties"
-                      ? "rotate-180"
-                      : ""
-                  }`}
-                />
-              </button>
+                <a
+                  href="/properties/houses"
+                  className="block py-4 text-sm text-red-600"
+                >
+                  Houses
+                </a>
 
-              {mobileDropdown === "properties" && (
-  <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+                <a
+                  href="/properties/apartments"
+                  className="block py-4 text-sm text-red-600"
+                >
+                  Apartments
+                </a>
 
-    <a
-      href="/properties"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      All Properties
-    </a>
+                <a
+                  href="/properties/plots"
+                  className="block py-4 text-sm text-red-600"
+                >
+                  Plots
+                </a>
 
-    <a
-  href="/properties/houses"
-  onTouchStart={() => {
-    window.location.href = "/properties/houses";
-  }}
-  className="block w-full py-4 text-sm text-gray-700"
->
-  Houses
-</a>
-
-    <a
-      href="/properties/apartments"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      Apartments
-    </a>
-
-    <a
-      href="/properties/plots"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      Plots
-    </a>
-
-    <a
-      href="/properties/commercial"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      Commercial
-    </a>
-
-  </div>
-)}
+                <a
+                  href="/properties/commercial"
+                  className="block py-4 text-sm text-red-600"
+                >
+                  Commercial
+                </a>
+              </div>
             </div>
 
             {/* ================= SERVICES ================= */}
@@ -477,38 +446,38 @@ export default function Navbar() {
 
              
               {mobileDropdown === "services" && (
-  <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
 
-    <a
-      href="/services"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      All Services
-    </a>
+                  <a
+                    href="/services"
+                    className="block w-full py-4 text-sm text-gray-700"
+                  >
+                    All Services
+                  </a>
 
-    <a
-      href="/services/buy"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      Buy Property
-    </a>
+                  <a
+                    href="/services/buy"
+                    className="block w-full py-4 text-sm text-gray-700"
+                  >
+                    Buy Property
+                  </a>
 
-    <a
-      href="/services/sell"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      Sell Property
-    </a>
+                  <a
+                    href="/services/sell"
+                    className="block w-full py-4 text-sm text-gray-700"
+                  >
+                    Sell Property
+                  </a>
 
-    <a
-      href="/services/rent"
-      className="block w-full py-4 text-sm text-gray-700"
-    >
-      Rent Property
-    </a>
+                  <a
+                    href="/services/rent"
+                    className="block w-full py-4 text-sm text-gray-700"
+                  >
+                    Rent Property
+                  </a>
 
-  </div>
-)}
+                </div>
+              )}
             </div>
 
             {/* PROJECTS */}
