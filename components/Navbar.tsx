@@ -398,6 +398,7 @@ export default function Navbar() {
                 <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
                   <Link
                     href="/properties"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     All Properties
@@ -405,6 +406,7 @@ export default function Navbar() {
 
                   <Link
                     href="/properties/houses"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Houses
@@ -412,6 +414,7 @@ export default function Navbar() {
 
                   <Link
                     href="/properties/apartments"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Apartments
@@ -419,6 +422,7 @@ export default function Navbar() {
 
                   <Link
                     href="/properties/plots"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Plots
@@ -426,6 +430,7 @@ export default function Navbar() {
 
                   <Link
                     href="/properties/commercial"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Commercial
@@ -469,6 +474,7 @@ export default function Navbar() {
                 <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
                   <Link
                     href="/services"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     All Services
@@ -476,6 +482,7 @@ export default function Navbar() {
 
                   <Link
                     href="/services/buy"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Buy Property
@@ -483,6 +490,7 @@ export default function Navbar() {
 
                   <Link
                     href="/services/sell"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Sell Property
@@ -490,6 +498,7 @@ export default function Navbar() {
 
                   <Link
                     href="/services/rent"
+                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Rent Property
