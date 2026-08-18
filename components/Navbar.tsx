@@ -407,55 +407,35 @@ export default function Navbar() {
 
                   <Link
                     href="/properties"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                    className="block touch-manipulation border-b border-gray-200 py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     All Properties
                   </Link>
 
                   <Link
                     href="/properties/houses"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                    className="block touch-manipulation border-b border-gray-200 py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     Houses
                   </Link>
 
                   <Link
                     href="/properties/apartments"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                    className="block touch-manipulation border-b border-gray-200 py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     Apartments
                   </Link>
 
                   <Link
                     href="/properties/plots"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                    className="block touch-manipulation border-b border-gray-200 py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     Plots
                   </Link>
 
                   <Link
                     href="/properties/commercial"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block py-4 text-sm text-gray-700"
+                    className="block touch-manipulation py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     Commercial
                   </Link>
@@ -500,44 +480,28 @@ export default function Navbar() {
 
                   <Link
                     href="/services"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                    className="block touch-manipulation border-b border-gray-200 py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     All Services
                   </Link>
 
                   <Link
                     href="/services/buy"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                    className="block touch-manipulation border-b border-gray-200 py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     Buy Property
                   </Link>
 
                   <Link
                     href="/services/sell"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                    className="block touch-manipulation border-b border-gray-200 py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     Sell Property
                   </Link>
 
                   <Link
                     href="/services/rent"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileDropdown(null);
-                    }}
-                    className="block py-4 text-sm text-gray-700"
+                    className="block touch-manipulation py-4 text-sm text-gray-700 active:bg-gray-200"
                   >
                     Rent Property
                   </Link>
