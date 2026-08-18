@@ -400,50 +400,45 @@ export default function Navbar() {
               </button>
 
               {mobileDropdown === "properties" && (
-                <div className="relative z-[70] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+  <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
 
-                  <Link
-                    href="/properties"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    All Properties
-                  </Link>
+    <a
+      href="/properties"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      All Properties
+    </a>
 
-                  <Link
-                    href="/properties/houses"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    Houses
-                  </Link>
+    <a
+      href="/properties/houses"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      Houses
+    </a>
 
-                  <Link
-                    href="/properties/apartments"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    Apartments
-                  </Link>
+    <a
+      href="/properties/apartments"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      Apartments
+    </a>
 
-                  <Link
-                    href="/properties/plots"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    Plots
-                  </Link>
+    <a
+      href="/properties/plots"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      Plots
+    </a>
 
-                  <Link
-                    href="/properties/commercial"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    Commercial
-                  </Link>
+    <a
+      href="/properties/commercial"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      Commercial
+    </a>
 
-                </div>
-              )}
+  </div>
+)}
             </div>
 
             {/* ================= SERVICES ================= */}
@@ -477,43 +472,40 @@ export default function Navbar() {
                 />
               </button>
 
+             
               {mobileDropdown === "services" && (
-                <div className="relative z-[70] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+  <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
 
-                  <Link
-                    href="/services"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    All Services
-                  </Link>
+    <a
+      href="/services"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      All Services
+    </a>
 
-                  <Link
-                    href="/services/buy"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    Buy Property
-                  </Link>
+    <a
+      href="/services/buy"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      Buy Property
+    </a>
 
-                  <Link
-                    href="/services/sell"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    Sell Property
-                  </Link>
+    <a
+      href="/services/sell"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      Sell Property
+    </a>
 
-                  <Link
-                    href="/services/rent"
-                    onClick={closeMobileMenu}
-                    className="relative z-[80] block w-full touch-manipulation py-4 text-sm text-gray-700"
-                  >
-                    Rent Property
-                  </Link>
+    <a
+      href="/services/rent"
+      className="block w-full py-4 text-sm text-gray-700"
+    >
+      Rent Property
+    </a>
 
-                </div>
-              )}
+  </div>
+)}
             </div>
 
             {/* PROJECTS */}
