@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
@@ -13,7 +13,6 @@ import {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -66,13 +65,6 @@ export default function Navbar() {
   const closeMobileMenu = () => {
     setMobileOpen(false);
     setMobileDropdown(null);
-  };
-
-  /* ================= MOBILE NAVIGATION ================= */
-
-  const handleMobileNavigation = (href: string) => {
-    closeMobileMenu();
-    router.push(href);
   };
 
   /* ================= MOBILE DROPDOWN ================= */
@@ -359,17 +351,17 @@ export default function Navbar() {
         {/* ================= MOBILE MENU ================= */}
 
         {mobileOpen && (
-          <div className="relative z-[100] max-h-[calc(100vh-76px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
+          <div className="relative max-h-[calc(100vh-76px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
 
             {/* HOME */}
 
-            <button
-              type="button"
-              onClick={() => handleMobileNavigation("/")}
+            <Link
+              href="/"
+              onClick={closeMobileMenu}
               className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               Home
-            </button>
+            </Link>
 
             {/* ================= PROPERTIES ================= */}
 
@@ -403,46 +395,41 @@ export default function Navbar() {
               </button>
 
               {mobileDropdown === "properties" && (
-                <div className="relative z-[200] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
-                  <a
+                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+                  <Link
                     href="/properties"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     All Properties
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/properties/houses"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Houses
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/properties/apartments"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Apartments
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/properties/plots"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Plots
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/properties/commercial"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Commercial
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
@@ -479,90 +466,78 @@ export default function Navbar() {
               </button>
 
               {mobileDropdown === "services" && (
-                <div className="relative z-[200] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
-                  <a
+                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+                  <Link
                     href="/services"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     All Services
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/services/buy"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Buy Property
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/services/sell"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Sell Property
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/services/rent"
-                    onClick={closeMobileMenu}
                     className="block w-full py-3 text-sm text-gray-700"
                   >
                     Rent Property
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
 
             {/* PROJECTS */}
 
-            <button
-              type="button"
-              onClick={() =>
-                handleMobileNavigation("/projects")
-              }
+            <Link
+              href="/projects"
+              onClick={closeMobileMenu}
               className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               Projects
-            </button>
+            </Link>
 
             {/* ABOUT */}
 
-            <button
-              type="button"
-              onClick={() =>
-                handleMobileNavigation("/about")
-              }
+            <Link
+              href="/about"
+              onClick={closeMobileMenu}
               className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               About Us
-            </button>
+            </Link>
 
             {/* CONTACT */}
 
-            <button
-              type="button"
-              onClick={() =>
-                handleMobileNavigation("/contact")
-              }
+            <Link
+              href="/contact"
+              onClick={closeMobileMenu}
               className="block w-full py-4 text-left font-medium text-gray-700"
             >
               Contact
-            </button>
+            </Link>
 
             {/* ENQUIRE */}
 
-            <button
-              type="button"
-              onClick={() =>
-                handleMobileNavigation("/enquire")
-              }
+            <Link
+              href="/enquire"
+              onClick={closeMobileMenu}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1E3D] px-4 py-3.5 font-semibold text-white"
             >
               Enquire Now
               <ArrowRight size={18} />
-            </button>
+            </Link>
 
           </div>
         )}
