@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -34,8 +35,15 @@ export default function Navbar() {
     };
   }, []);
 
+  // Close desktop dropdown when clicking outside.
+  // IMPORTANT: Do not run this while the mobile menu is open.
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // Mobile menu is open, so let mobile Links handle the click normally.
+      if (mobileOpen) {
+        return;
+      }
+
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -49,11 +57,19 @@ export default function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [mobileOpen]);
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
     setOpenDropdown(null);
+  };
+
+  const toggleMobileDropdown = (
+    dropdown: "properties" | "services"
+  ) => {
+    setOpenDropdown(
+      openDropdown === dropdown ? null : dropdown
+    );
   };
 
   return (
@@ -94,7 +110,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Menu */}
+          {/* ================= DESKTOP MENU ================= */}
           <div
             ref={dropdownRef}
             className="hidden items-center lg:flex lg:gap-6 xl:gap-8"
@@ -116,6 +132,7 @@ export default function Navbar() {
               {/* Properties */}
               <div className="relative">
                 <button
+                  type="button"
                   onClick={() =>
                     setOpenDropdown(
                       openDropdown === "properties"
@@ -144,6 +161,7 @@ export default function Navbar() {
 
                 {openDropdown === "properties" && (
                   <div className="absolute left-0 top-10 z-50 w-60 rounded-xl border border-gray-200 bg-white py-2 shadow-xl">
+
                     <Link
                       href="/properties"
                       className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
@@ -185,6 +203,7 @@ export default function Navbar() {
               {/* Services */}
               <div className="relative">
                 <button
+                  type="button"
                   onClick={() =>
                     setOpenDropdown(
                       openDropdown === "services"
@@ -213,6 +232,7 @@ export default function Navbar() {
 
                 {openDropdown === "services" && (
                   <div className="absolute left-0 top-10 z-50 w-60 rounded-xl border border-gray-200 bg-white py-2 shadow-xl">
+
                     <Link
                       href="/services"
                       className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
@@ -291,10 +311,16 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Button */}
+          {/* ================= MOBILE BUTTON ================= */}
           <button
             type="button"
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => {
+              setMobileOpen(!mobileOpen);
+
+              if (mobileOpen) {
+                setOpenDropdown(null);
+              }
+            }}
             className="rounded-lg p-2 text-[#0B1E3D] transition hover:bg-gray-100 lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
@@ -303,9 +329,9 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ================= MOBILE MENU ================= */}
         {mobileOpen && (
-          <div className="max-h-[calc(100vh-90px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
+          <div className="relative z-50 max-h-[calc(100vh-90px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
 
             {/* Home */}
             <Link
@@ -324,13 +350,7 @@ export default function Navbar() {
             <div className="border-b border-gray-100">
               <button
                 type="button"
-                onClick={() =>
-                  setOpenDropdown(
-                    openDropdown === "properties"
-                      ? null
-                      : "properties"
-                  )
-                }
+                onClick={() => toggleMobileDropdown("properties")}
                 className="flex w-full items-center justify-between py-4 font-medium text-gray-700"
               >
                 <span
@@ -355,6 +375,7 @@ export default function Navbar() {
 
               {openDropdown === "properties" && (
                 <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+
                   <Link
                     href="/properties"
                     onClick={closeMobileMenu}
@@ -394,6 +415,7 @@ export default function Navbar() {
                   >
                     Commercial
                   </Link>
+
                 </div>
               )}
             </div>
@@ -402,13 +424,7 @@ export default function Navbar() {
             <div className="border-b border-gray-100">
               <button
                 type="button"
-                onClick={() =>
-                  setOpenDropdown(
-                    openDropdown === "services"
-                      ? null
-                      : "services"
-                  )
-                }
+                onClick={() => toggleMobileDropdown("services")}
                 className="flex w-full items-center justify-between py-4 font-medium text-gray-700"
               >
                 <span
@@ -433,6 +449,7 @@ export default function Navbar() {
 
               {openDropdown === "services" && (
                 <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+
                   <Link
                     href="/services"
                     onClick={closeMobileMenu}
@@ -464,6 +481,7 @@ export default function Navbar() {
                   >
                     Rent Property
                   </Link>
+
                 </div>
               )}
             </div>
@@ -516,6 +534,7 @@ export default function Navbar() {
               Enquire Now
               <ArrowRight size={18} />
             </Link>
+
           </div>
         )}
       </div>
