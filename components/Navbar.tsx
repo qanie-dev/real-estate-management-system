@@ -43,22 +43,7 @@ export default function Navbar() {
 
   /* ================= DESKTOP OUTSIDE CLICK ================= */
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        desktopDropdownRef.current &&
-        !desktopDropdownRef.current.contains(event.target as Node)
-      ) {
-        setDesktopDropdown(null);
-      }
-    };
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   /* ================= CLOSE MOBILE MENU ================= */
 
