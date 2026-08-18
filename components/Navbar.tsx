@@ -1,10 +1,9 @@
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
   X,
@@ -14,14 +13,22 @@ import {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<
+
+  const [desktopDropdown, setDesktopDropdown] = useState<
     "properties" | "services" | null
   >(null);
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [mobileDropdown, setMobileDropdown] = useState<
+    "properties" | "services" | null
+  >(null);
+
+  const desktopDropdownRef = useRef<HTMLDivElement>(null);
+
+  /* ================= SCROLL ================= */
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,20 +42,15 @@ export default function Navbar() {
     };
   }, []);
 
-  // Close desktop dropdown when clicking outside.
-  // IMPORTANT: Do not run this while the mobile menu is open.
+  /* ================= DESKTOP OUTSIDE CLICK ================= */
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Mobile menu is open, so let mobile Links handle the click normally.
-      if (mobileOpen) {
-        return;
-      }
-
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        desktopDropdownRef.current &&
+        !desktopDropdownRef.current.contains(event.target as Node)
       ) {
-        setOpenDropdown(null);
+        setDesktopDropdown(null);
       }
     };
 
@@ -57,24 +59,35 @@ export default function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [mobileOpen]);
+  }, []);
+
+  /* ================= CLOSE MOBILE ================= */
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
-    setOpenDropdown(null);
+    setMobileDropdown(null);
   };
+
+  /* ================= MOBILE NAVIGATION ================= */
+
+  const handleMobileNavigation = (href: string) => {
+    closeMobileMenu();
+    router.push(href);
+  };
+
+  /* ================= MOBILE DROPDOWN ================= */
 
   const toggleMobileDropdown = (
     dropdown: "properties" | "services"
   ) => {
-    setOpenDropdown(
-      openDropdown === dropdown ? null : dropdown
+    setMobileDropdown((current) =>
+      current === dropdown ? null : dropdown
     );
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
         scrolled
           ? "bg-white/95 shadow-md backdrop-blur-md"
           : "bg-white"
@@ -82,10 +95,12 @@ export default function Navbar() {
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Navbar */}
+        {/* ================= NAVBAR ================= */}
+
         <div className="flex min-h-[76px] items-center justify-between">
 
-          {/* Logo */}
+          {/* LOGO */}
+
           <Link
             href="/"
             onClick={closeMobileMenu}
@@ -111,13 +126,15 @@ export default function Navbar() {
           </Link>
 
           {/* ================= DESKTOP MENU ================= */}
+
           <div
-            ref={dropdownRef}
+            ref={desktopDropdownRef}
             className="hidden items-center lg:flex lg:gap-6 xl:gap-8"
           >
             <nav className="flex items-center gap-5 xl:gap-7">
 
-              {/* Home */}
+              {/* HOME */}
+
               <Link
                 href="/"
                 className={`border-b-2 pb-1 font-medium transition ${
@@ -129,20 +146,21 @@ export default function Navbar() {
                 Home
               </Link>
 
-              {/* Properties */}
+              {/* PROPERTIES */}
+
               <div className="relative">
                 <button
                   type="button"
                   onClick={() =>
-                    setOpenDropdown(
-                      openDropdown === "properties"
+                    setDesktopDropdown(
+                      desktopDropdown === "properties"
                         ? null
                         : "properties"
                     )
                   }
                   className={`flex items-center gap-1 border-b-2 pb-1 font-medium transition ${
                     pathname.startsWith("/properties") ||
-                    openDropdown === "properties"
+                    desktopDropdown === "properties"
                       ? "border-[#C79A54] text-[#C79A54]"
                       : "border-transparent text-gray-700 hover:text-[#C79A54]"
                   }`}
@@ -152,68 +170,70 @@ export default function Navbar() {
                   <ChevronDown
                     size={17}
                     className={`transition-transform ${
-                      openDropdown === "properties"
+                      desktopDropdown === "properties"
                         ? "rotate-180"
                         : ""
                     }`}
                   />
                 </button>
 
-                {openDropdown === "properties" && (
-                  <div className="absolute left-0 top-10 z-50 w-60 rounded-xl border border-gray-200 bg-white py-2 shadow-xl">
+                {desktopDropdown === "properties" && (
+                  <div className="absolute left-0 top-10 z-[100] w-60 rounded-xl border border-gray-200 bg-white py-2 shadow-xl">
 
                     <Link
                       href="/properties"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       All Properties
                     </Link>
 
                     <Link
                       href="/properties/houses"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       Houses
                     </Link>
 
                     <Link
                       href="/properties/apartments"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       Apartments
                     </Link>
 
                     <Link
                       href="/properties/plots"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       Plots
                     </Link>
 
                     <Link
                       href="/properties/commercial"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       Commercial
                     </Link>
+
                   </div>
                 )}
               </div>
 
-              {/* Services */}
+              {/* SERVICES */}
+
               <div className="relative">
                 <button
                   type="button"
                   onClick={() =>
-                    setOpenDropdown(
-                      openDropdown === "services"
+                    setDesktopDropdown(
+                      desktopDropdown === "services"
                         ? null
                         : "services"
                     )
                   }
                   className={`flex items-center gap-1 border-b-2 pb-1 font-medium transition ${
                     pathname.startsWith("/services") ||
-                    openDropdown === "services"
+                    desktopDropdown === "services"
                       ? "border-[#C79A54] text-[#C79A54]"
                       : "border-transparent text-gray-700 hover:text-[#C79A54]"
                   }`}
@@ -223,48 +243,50 @@ export default function Navbar() {
                   <ChevronDown
                     size={17}
                     className={`transition-transform ${
-                      openDropdown === "services"
+                      desktopDropdown === "services"
                         ? "rotate-180"
                         : ""
                     }`}
                   />
                 </button>
 
-                {openDropdown === "services" && (
-                  <div className="absolute left-0 top-10 z-50 w-60 rounded-xl border border-gray-200 bg-white py-2 shadow-xl">
+                {desktopDropdown === "services" && (
+                  <div className="absolute left-0 top-10 z-[100] w-60 rounded-xl border border-gray-200 bg-white py-2 shadow-xl">
 
                     <Link
                       href="/services"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       All Services
                     </Link>
 
                     <Link
                       href="/services/buy"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       Buy Property
                     </Link>
 
                     <Link
                       href="/services/sell"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       Sell Property
                     </Link>
 
                     <Link
                       href="/services/rent"
-                      className="block px-5 py-3 text-gray-700 transition hover:bg-gray-50 hover:text-[#C79A54]"
+                      className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#C79A54]"
                     >
                       Rent Property
                     </Link>
+
                   </div>
                 )}
               </div>
 
-              {/* Projects */}
+              {/* PROJECTS */}
+
               <Link
                 href="/projects"
                 className={`border-b-2 pb-1 font-medium transition ${
@@ -276,7 +298,8 @@ export default function Navbar() {
                 Projects
               </Link>
 
-              {/* About */}
+              {/* ABOUT */}
+
               <Link
                 href="/about"
                 className={`border-b-2 pb-1 font-medium transition ${
@@ -288,7 +311,8 @@ export default function Navbar() {
                 About Us
               </Link>
 
-              {/* Contact */}
+              {/* CONTACT */}
+
               <Link
                 href="/contact"
                 className={`border-b-2 pb-1 font-medium transition ${
@@ -301,10 +325,11 @@ export default function Navbar() {
               </Link>
             </nav>
 
-            {/* Enquire */}
+            {/* ENQUIRE */}
+
             <Link
               href="/enquire"
-              className="flex items-center gap-2 whitespace-nowrap rounded-xl bg-[#0B1E3D] px-5 py-3 font-semibold text-white transition hover:bg-[#16335F] xl:px-7"
+              className="flex items-center gap-2 whitespace-nowrap rounded-xl bg-[#0B1E3D] px-5 py-3 font-semibold text-white hover:bg-[#16335F] xl:px-7"
             >
               Enquire Now
               <ArrowRight size={18} />
@@ -312,45 +337,49 @@ export default function Navbar() {
           </div>
 
           {/* ================= MOBILE BUTTON ================= */}
+
           <button
             type="button"
             onClick={() => {
-              setMobileOpen(!mobileOpen);
-
-              if (mobileOpen) {
-                setOpenDropdown(null);
-              }
+              setMobileOpen((current) => !current);
+              setMobileDropdown(null);
             }}
-            className="rounded-lg p-2 text-[#0B1E3D] transition hover:bg-gray-100 lg:hidden"
+            className="rounded-lg p-2 text-[#0B1E3D] hover:bg-gray-100 lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileOpen ? (
+              <X size={28} />
+            ) : (
+              <Menu size={28} />
+            )}
           </button>
         </div>
 
         {/* ================= MOBILE MENU ================= */}
-        {mobileOpen && (
-          <div className="relative z-50 max-h-[calc(100vh-90px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
 
-            {/* Home */}
-            <Link
-              href="/"
-              onClick={closeMobileMenu}
-              className={`block border-b border-gray-100 py-4 font-medium ${
-                pathname === "/"
-                  ? "text-[#C79A54]"
-                  : "text-gray-700"
-              }`}
+        {mobileOpen && (
+          <div className="relative z-[100] max-h-[calc(100vh-76px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
+
+            {/* HOME */}
+
+            <button
+              type="button"
+              onClick={() => handleMobileNavigation("/")}
+              className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               Home
-            </Link>
+            </button>
 
-            {/* Mobile Properties */}
+            {/* ================= PROPERTIES ================= */}
+
             <div className="border-b border-gray-100">
+
               <button
                 type="button"
-                onClick={() => toggleMobileDropdown("properties")}
+                onClick={() =>
+                  toggleMobileDropdown("properties")
+                }
                 className="flex w-full items-center justify-between py-4 font-medium text-gray-700"
               >
                 <span
@@ -366,65 +395,87 @@ export default function Navbar() {
                 <ChevronDown
                   size={18}
                   className={`transition-transform ${
-                    openDropdown === "properties"
+                    mobileDropdown === "properties"
                       ? "rotate-180"
                       : ""
                   }`}
                 />
               </button>
 
-              {openDropdown === "properties" && (
-                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+              {mobileDropdown === "properties" && (
+                <div className="relative z-[200] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
 
-                  <Link
-                    href="/properties"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation("/properties")
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     All Properties
-                  </Link>
+                  </button>
 
-                  <Link
-                    href="/properties/houses"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation(
+                        "/properties/houses"
+                      )
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     Houses
-                  </Link>
+                  </button>
 
-                  <Link
-                    href="/properties/apartments"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation(
+                        "/properties/apartments"
+                      )
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     Apartments
-                  </Link>
+                  </button>
 
-                  <Link
-                    href="/properties/plots"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation(
+                        "/properties/plots"
+                      )
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     Plots
-                  </Link>
+                  </button>
 
-                  <Link
-                    href="/properties/commercial"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation(
+                        "/properties/commercial"
+                      )
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     Commercial
-                  </Link>
+                  </button>
 
                 </div>
               )}
             </div>
 
-            {/* Mobile Services */}
+            {/* ================= SERVICES ================= */}
+
             <div className="border-b border-gray-100">
+
               <button
                 type="button"
-                onClick={() => toggleMobileDropdown("services")}
+                onClick={() =>
+                  toggleMobileDropdown("services")
+                }
                 className="flex w-full items-center justify-between py-4 font-medium text-gray-700"
               >
                 <span
@@ -440,100 +491,108 @@ export default function Navbar() {
                 <ChevronDown
                   size={18}
                   className={`transition-transform ${
-                    openDropdown === "services"
+                    mobileDropdown === "services"
                       ? "rotate-180"
                       : ""
                   }`}
                 />
               </button>
 
-              {openDropdown === "services" && (
-                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
+              {mobileDropdown === "services" && (
+                <div className="relative z-[200] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
 
-                  <Link
-                    href="/services"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation("/services")
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     All Services
-                  </Link>
+                  </button>
 
-                  <Link
-                    href="/services/buy"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation("/services/buy")
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     Buy Property
-                  </Link>
+                  </button>
 
-                  <Link
-                    href="/services/sell"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation("/services/sell")
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     Sell Property
-                  </Link>
+                  </button>
 
-                  <Link
-                    href="/services/rent"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-gray-600 hover:text-[#C79A54]"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMobileNavigation("/services/rent")
+                    }
+                    className="block w-full py-3 text-left text-sm text-gray-700"
                   >
                     Rent Property
-                  </Link>
+                  </button>
 
                 </div>
               )}
             </div>
 
-            {/* Projects */}
-            <Link
-              href="/projects"
-              onClick={closeMobileMenu}
-              className={`block border-b border-gray-100 py-4 font-medium ${
-                pathname === "/projects"
-                  ? "text-[#C79A54]"
-                  : "text-gray-700"
-              }`}
+            {/* PROJECTS */}
+
+            <button
+              type="button"
+              onClick={() =>
+                handleMobileNavigation("/projects")
+              }
+              className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               Projects
-            </Link>
+            </button>
 
-            {/* About */}
-            <Link
-              href="/about"
-              onClick={closeMobileMenu}
-              className={`block border-b border-gray-100 py-4 font-medium ${
-                pathname === "/about"
-                  ? "text-[#C79A54]"
-                  : "text-gray-700"
-              }`}
+            {/* ABOUT */}
+
+            <button
+              type="button"
+              onClick={() =>
+                handleMobileNavigation("/about")
+              }
+              className="block w-full border-b border-gray-100 py-4 text-left font-medium text-gray-700"
             >
               About Us
-            </Link>
+            </button>
 
-            {/* Contact */}
-            <Link
-              href="/contact"
-              onClick={closeMobileMenu}
-              className={`block py-4 font-medium ${
-                pathname === "/contact"
-                  ? "text-[#C79A54]"
-                  : "text-gray-700"
-              }`}
+            {/* CONTACT */}
+
+            <button
+              type="button"
+              onClick={() =>
+                handleMobileNavigation("/contact")
+              }
+              className="block w-full py-4 text-left font-medium text-gray-700"
             >
               Contact
-            </Link>
+            </button>
 
-            {/* Mobile Enquire */}
-            <Link
-              href="/enquire"
-              onClick={closeMobileMenu}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1E3D] px-4 py-3.5 font-semibold text-white transition hover:bg-[#16335F]"
+            {/* ENQUIRE */}
+
+            <button
+              type="button"
+              onClick={() =>
+                handleMobileNavigation("/enquire")
+              }
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1E3D] px-4 py-3.5 font-semibold text-white"
             >
               Enquire Now
               <ArrowRight size={18} />
-            </Link>
+            </button>
 
           </div>
         )}
