@@ -404,45 +404,45 @@ export default function Navbar() {
 
               {mobileDropdown === "properties" && (
                 <div className="relative z-[200] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
-                  <Link
+                  <a
                     href="/properties"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     All Properties
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="/properties/houses"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     Houses
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="/properties/apartments"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     Apartments
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="/properties/plots"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     Plots
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="/properties/commercial"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     Commercial
-                  </Link>
+                  </a>
                 </div>
               )}
             </div>
@@ -480,37 +480,37 @@ export default function Navbar() {
 
               {mobileDropdown === "services" && (
                 <div className="relative z-[200] mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
-                  <Link
+                  <a
                     href="/services"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     All Services
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="/services/buy"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     Buy Property
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="/services/sell"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     Sell Property
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href="/services/rent"
                     onClick={closeMobileMenu}
-                    className="block py-3 text-sm text-gray-700"
+                    className="block w-full py-3 text-sm text-gray-700"
                   >
                     Rent Property
-                  </Link>
+                  </a>
                 </div>
               )}
             </div>
