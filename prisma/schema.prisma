@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  image      String?
+  createdAt  DateTime   @default(now())
+
+  properties Property[]
+}
+
+model Property {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  price       Decimal   @db.Decimal(12,2)
+
+  city        String
+  location    String
+
+  categoryId  Int
+  category    Category  @relation(fields: [categoryId], references: [id])
+
+  bedrooms    Int
+  bathrooms   Int
+  area        String
+
+  image        String?
+  featured     Boolean @default(false)
+  status       String  @default("Available")
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  image       String?
+  icon        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+
+  image       String?
+
+  location    String
+  status      String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+
+  createdAt DateTime @default(now())
+}
+
+model Enquiry {
+  id         Int      @id @default(autoincrement())
+
+  name       String
+  email      String
+  phone      String
+  subject    String?
+  message    String
+
+  createdAt  DateTime @default(now())
+}
+
+model Hero {
+  id                 Int      @id @default(autoincrement())
+
+  heading            String
+  subHeading         String
+  description        String
+
+  backgroundImage    String
+
+  searchPlaceholder  String?
+
+  active             Boolean  @default(true)
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Testimonial {
+  id         Int      @id @default(autoincrement())
+
+  name       String
+  designation String
+  message    String
+  rating     Int
+
+  image      String?
+
+  active     Boolean @default(true)
+
+  createdAt  DateTime @default(now())
+}
+
+model Agent {
+  id          Int      @id @default(autoincrement())
+
+  name        String
+  designation String
+  email       String   @unique
+  phone       String
+
+  image       String?
+
+  experience  String?
+  address     String?
+  description String?
+
+  facebook    String?
+  instagram   String?
+  linkedin    String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
