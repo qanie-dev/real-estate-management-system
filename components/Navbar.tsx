@@ -77,14 +77,6 @@ export default function Navbar() {
     );
   };
 
-  /* ================= GO TO PAGE FUNCTION ================= */
-
-  const goToPage = (href: string) => {
-    setMobileOpen(false);
-    setMobileDropdown(null);
-    window.location.href = href;
-  };
-
   return (
     <header
       className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
@@ -364,66 +356,112 @@ export default function Navbar() {
         {/* ================= MOBILE MENU ================= */}
 
         {mobileOpen && (
-          <div className="relative z-[60] max-h-[calc(100vh-76px)] overflow-y-auto border-t border-gray-100 bg-white pb-6 lg:hidden">
+          <div className="fixed left-0 right-0 top-[76px] z-[9999] max-h-[calc(100vh-76px)] overflow-y-auto bg-white shadow-xl lg:hidden">
 
             {/* HOME */}
 
-            <button
-              type="button"
-              onClick={() => goToPage("/")}
-              className="block w-full border-b border-gray-100 px-5 py-4 text-left font-medium text-gray-700 active:bg-gray-100"
+            <Link
+              href="/"
+              onClick={() => {
+                setMobileOpen(false);
+                setMobileDropdown(null);
+              }}
+              className="block border-b border-gray-100 px-5 py-4 text-left font-medium text-gray-700"
             >
               Home
-            </button>
+            </Link>
 
             {/* ================= PROPERTIES ================= */}
 
             <div className="border-b border-gray-100">
-              <div className="px-5 py-4 font-medium text-gray-700">
-                Properties
-              </div>
 
-              <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
-                <button
-                  type="button"
-                  onClick={() => goToPage("/properties")}
-                  className="block w-full px-5 py-4 text-left text-sm text-red-600 active:bg-gray-200"
+              <button
+                type="button"
+                onClick={() =>
+                  toggleMobileDropdown("properties")
+                }
+                className="flex w-full items-center justify-between px-5 py-4 font-medium text-gray-700"
+              >
+                <span
+                  className={
+                    pathname.startsWith("/properties")
+                      ? "text-[#C79A54]"
+                      : ""
+                  }
                 >
-                  All Properties
-                </button>
+                  Properties
+                </span>
 
-                <button
-                  type="button"
-                  onClick={() => goToPage("/properties/houses")}
-                  className="block w-full px-5 py-4 text-left text-sm text-red-600 active:bg-gray-200"
-                >
-                  Houses
-                </button>
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform ${
+                    mobileDropdown === "properties"
+                      ? "rotate-180"
+                      : ""
+                  }`}
+                />
+              </button>
 
-                <button
-                  type="button"
-                  onClick={() => goToPage("/properties/apartments")}
-                  className="block w-full px-5 py-4 text-left text-sm text-red-600 active:bg-gray-200"
-                >
-                  Apartments
-                </button>
+              {mobileDropdown === "properties" && (
+                <div className="bg-gray-50 px-5 pb-3">
 
-                <button
-                  type="button"
-                  onClick={() => goToPage("/properties/plots")}
-                  className="block w-full px-5 py-4 text-left text-sm text-red-600 active:bg-gray-200"
-                >
-                  Plots
-                </button>
+                  <Link
+                    href="/properties"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                  >
+                    All Properties
+                  </Link>
 
-                <button
-                  type="button"
-                  onClick={() => goToPage("/properties/commercial")}
-                  className="block w-full px-5 py-4 text-left text-sm text-red-600 active:bg-gray-200"
-                >
-                  Commercial
-                </button>
-              </div>
+                  <Link
+                    href="/properties/houses"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                  >
+                    Houses
+                  </Link>
+
+                  <Link
+                    href="/properties/apartments"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                  >
+                    Apartments
+                  </Link>
+
+                  <Link
+                    href="/properties/plots"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
+                  >
+                    Plots
+                  </Link>
+
+                  <Link
+                    href="/properties/commercial"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block py-4 text-sm text-gray-700"
+                  >
+                    Commercial
+                  </Link>
+
+                </div>
+              )}
             </div>
 
             {/* ================= SERVICES ================= */}
@@ -458,83 +496,109 @@ export default function Navbar() {
               </button>
 
               {mobileDropdown === "services" && (
-                <div className="mb-3 ml-4 border-l-2 border-[#C79A54] pl-4">
-                  <button
-                    type="button"
-                    onClick={() => goToPage("/services")}
-                    className="block w-full px-5 py-4 text-left text-sm text-gray-700 active:bg-gray-200"
+                <div className="bg-gray-50 px-5 pb-3">
+
+                  <Link
+                    href="/services"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
                   >
                     All Services
-                  </button>
+                  </Link>
 
-                  <button
-                    type="button"
-                    onClick={() => goToPage("/services/buy")}
-                    className="block w-full px-5 py-4 text-left text-sm text-gray-700 active:bg-gray-200"
+                  <Link
+                    href="/services/buy"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
                   >
                     Buy Property
-                  </button>
+                  </Link>
 
-                  <button
-                    type="button"
-                    onClick={() => goToPage("/services/sell")}
-                    className="block w-full px-5 py-4 text-left text-sm text-gray-700 active:bg-gray-200"
+                  <Link
+                    href="/services/sell"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block border-b border-gray-200 py-4 text-sm text-gray-700"
                   >
                     Sell Property
-                  </button>
+                  </Link>
 
-                  <button
-                    type="button"
-                    onClick={() => goToPage("/services/rent")}
-                    className="block w-full px-5 py-4 text-left text-sm text-gray-700 active:bg-gray-200"
+                  <Link
+                    href="/services/rent"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileDropdown(null);
+                    }}
+                    className="block py-4 text-sm text-gray-700"
                   >
                     Rent Property
-                  </button>
+                  </Link>
+
                 </div>
               )}
             </div>
 
             {/* PROJECTS */}
 
-            <button
-              type="button"
-              onClick={() => goToPage("/projects")}
-              className="block w-full border-b border-gray-100 px-5 py-4 text-left font-medium text-gray-700 active:bg-gray-100"
+            <Link
+              href="/projects"
+              onClick={() => {
+                setMobileOpen(false);
+                setMobileDropdown(null);
+              }}
+              className="block border-b border-gray-100 px-5 py-4 text-left font-medium text-gray-700"
             >
               Projects
-            </button>
+            </Link>
 
             {/* ABOUT */}
 
-            <button
-              type="button"
-              onClick={() => goToPage("/about")}
-              className="block w-full border-b border-gray-100 px-5 py-4 text-left font-medium text-gray-700 active:bg-gray-100"
+            <Link
+              href="/about"
+              onClick={() => {
+                setMobileOpen(false);
+                setMobileDropdown(null);
+              }}
+              className="block border-b border-gray-100 px-5 py-4 text-left font-medium text-gray-700"
             >
               About Us
-            </button>
+            </Link>
 
             {/* CONTACT */}
 
-            <button
-              type="button"
-              onClick={() => goToPage("/contact")}
-              className="block w-full px-5 py-4 text-left font-medium text-gray-700 active:bg-gray-100"
+            <Link
+              href="/contact"
+              onClick={() => {
+                setMobileOpen(false);
+                setMobileDropdown(null);
+              }}
+              className="block border-b border-gray-100 px-5 py-4 text-left font-medium text-gray-700"
             >
               Contact
-            </button>
+            </Link>
 
             {/* ENQUIRE */}
 
             <div className="px-5 pb-6">
-              <button
-                type="button"
-                onClick={() => goToPage("/enquire")}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1E3D] px-4 py-4 font-semibold text-white active:bg-[#16335F]"
+              <Link
+                href="/enquire"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setMobileDropdown(null);
+                }}
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B1E3D] px-4 py-4 font-semibold text-white"
               >
                 Enquire Now
                 <ArrowRight size={18} />
-              </button>
+              </Link>
             </div>
 
           </div>
