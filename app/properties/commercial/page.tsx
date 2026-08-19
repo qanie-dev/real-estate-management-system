@@ -77,7 +77,7 @@ export default function CommercialPage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('/images/commercial.jfif')",
+            backgroundImage: "url('/images/commercial.jpg')",
           }}
         />
 

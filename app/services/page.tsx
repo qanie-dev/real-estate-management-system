@@ -71,7 +71,7 @@ export default function ServicesPage() {
       <section
         className="relative min-h-[350px] sm:min-h-[380px] bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/services.jfif')",
+          backgroundImage: "url('/images/services.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-[#081B37]/75" />

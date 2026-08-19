@@ -84,7 +84,7 @@ export default function ApartmentsPage() {
           bg-center
         "
         style={{
-          backgroundImage: "url('/images/apartment.jfif')",
+          backgroundImage: "url('/images/apartment.jpg')",
         }}
       >
 

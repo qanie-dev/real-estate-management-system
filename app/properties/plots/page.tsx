@@ -95,7 +95,7 @@ export default function PlotPage() {
       <section
         className="relative min-h-[360px] sm:h-[400px] lg:h-[430px] bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/plot.jfif')",
+          backgroundImage: "url('/images/plot.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-[#081B37]/75" />

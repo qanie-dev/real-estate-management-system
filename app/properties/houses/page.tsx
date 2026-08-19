@@ -90,7 +90,7 @@ export default function HousesPage() {
       <section
         className="relative h-[320px] sm:h-[350px] md:h-[380px] bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/house.jfif')",
+          backgroundImage: "url('/images/house.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-[#081B37]/75" />

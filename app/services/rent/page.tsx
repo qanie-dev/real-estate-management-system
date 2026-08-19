@@ -54,7 +54,7 @@ export default function RentPropertyPage() {
       <section
         className="relative min-h-[420px] sm:min-h-[460px] lg:h-[500px] bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/rent.jfif')",
+          backgroundImage: "url('/images/rent.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-[#081B37]/75" />

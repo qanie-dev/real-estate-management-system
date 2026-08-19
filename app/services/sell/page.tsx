@@ -55,7 +55,7 @@ export default function SellPropertyPage() {
       <section
         className="relative min-h-[360px] sm:min-h-[400px] bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/sell.jfif')",
+          backgroundImage: "url('/images/sell.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-[#081B37]/75" />
