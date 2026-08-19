@@ -106,7 +106,7 @@ export default function ContactPage() {
       <section className="relative min-h-[360px] sm:min-h-[400px] flex items-center">
 
         <Image
-          src="/images/plot.jfif"
+          src="/images/plot.jpg"
           alt="Contact Us"
           fill
           className="object-cover"

@@ -4,23 +4,23 @@ import Image from "next/image";
 const brands = [
   {
     name: "Bahria",
-    image: "/images/bahria.jfif",
+    image: "/images/bahria.jpg",
   },
   {
     name: "Zameen",
-    image: "/images/zameen.jfif",
+    image: "/images/zameen.jpg",
   },
   {
     name: "DHA",
-    image: "/images/dha.jfif",
+    image: "/images/dha.jpg",
   },
   {
     name: "park-view-city",
-    image: "/images/parkviewcity.jfif",
+    image: "/images/parkviewcity.jpg",
   },
   {
     name: "capital-smart-city",
-    image: "/images/capitalsmartcity.jfif",
+    image: "/images/capitalsmartcity.jpg",
   },
 ];
 

@@ -61,7 +61,7 @@ export default function ProjectsPage() {
       <section className="relative h-[300px] sm:h-[340px] md:h-[380px]">
 
         <Image
-          src="/images/commercial.jfif"
+          src="/images/commercial.jpg"
           alt="Projects"
           fill
           priority

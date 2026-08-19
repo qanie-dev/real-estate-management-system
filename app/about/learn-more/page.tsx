@@ -56,7 +56,7 @@ export default function LearnMorePage() {
             <div className="w-full flex justify-center">
 
               <Image
-                src="/images/about.jfif"
+                src="/images/about.jpg"
                 alt="HomeLuxe Office"
                 width={500}
                 height={500}

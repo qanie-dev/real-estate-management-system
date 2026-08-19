@@ -1,0 +1,57 @@
+pg_restore: connecting to database for restore
+pg_restore: executing SELECT pg_catalog.set_config('search_path', '', false);
+pg_restore: processing data for table "public.Admin"
+pg_restore: while PROCESSING TOC:
+pg_restore: from TOC entry 5106; 0 28049 TABLE DATA Admin postgres
+pg_restore: error: COPY failed for table "Admin": ERROR:  duplicate key value violates unique constraint "Admin_pkey"
+DETAIL:  Key (id)=(4) already exists.
+CONTEXT:  COPY Admin, line 1
+pg_restore: processing data for table "public.Agent"
+pg_restore: from TOC entry 5124; 0 32009 TABLE DATA Agent postgres
+pg_restore: error: COPY failed for table "Agent": ERROR:  duplicate key value violates unique constraint "Agent_pkey"
+DETAIL:  Key (id)=(2) already exists.
+CONTEXT:  COPY Agent, line 1
+pg_restore: processing data for table "public.Category"
+pg_restore: from TOC entry 5110; 0 28729 TABLE DATA Category postgres
+pg_restore: error: COPY failed for table "Category": ERROR:  duplicate key value violates unique constraint "Category_pkey"
+DETAIL:  Key (id)=(9) already exists.
+CONTEXT:  COPY Category, line 1
+pg_restore: processing data for table "public.Contact"
+pg_restore: processing data for table "public.Enquiry"
+pg_restore: processing data for table "public.Hero"
+pg_restore: processing data for table "public.Project"
+pg_restore: from TOC entry 5114; 0 29745 TABLE DATA Project postgres
+pg_restore: error: COPY failed for table "Project": ERROR:  duplicate key value violates unique constraint "Project_pkey"
+DETAIL:  Key (id)=(7) already exists.
+CONTEXT:  COPY Project, line 1
+pg_restore: processing data for table "public.Property"
+pg_restore: from TOC entry 5108; 0 28079 TABLE DATA Property postgres
+pg_restore: error: COPY failed for table "Property": ERROR:  duplicate key value violates unique constraint "Property_pkey"
+DETAIL:  Key (id)=(18) already exists.
+CONTEXT:  COPY Property, line 1
+pg_restore: processing data for table "public.Service"
+pg_restore: from TOC entry 5112; 0 29462 TABLE DATA Service postgres
+pg_restore: error: COPY failed for table "Service": ERROR:  duplicate key value violates unique constraint "Service_pkey"
+DETAIL:  Key (id)=(2) already exists.
+CONTEXT:  COPY Service, line 1
+pg_restore: processing data for table "public.Testimonial"
+pg_restore: from TOC entry 5120; 0 31130 TABLE DATA Testimonial postgres
+pg_restore: error: COPY failed for table "Testimonial": ERROR:  duplicate key value violates unique constraint "Testimonial_pkey"
+DETAIL:  Key (id)=(1) already exists.
+CONTEXT:  COPY Testimonial, line 1
+pg_restore: processing data for table "public._prisma_migrations"
+pg_restore: from TOC entry 5104; 0 28034 TABLE DATA _prisma_migrations postgres
+pg_restore: error: COPY failed for table "_prisma_migrations": ERROR:  duplicate key value violates unique constraint "_prisma_migrations_pkey"
+DETAIL:  Key (id)=(2733919a-0cfa-495c-b19f-0e9daab3d7ae) already exists.
+CONTEXT:  COPY _prisma_migrations, line 1
+pg_restore: executing SEQUENCE SET Admin_id_seq
+pg_restore: executing SEQUENCE SET Agent_id_seq
+pg_restore: executing SEQUENCE SET Category_id_seq
+pg_restore: executing SEQUENCE SET Contact_id_seq
+pg_restore: executing SEQUENCE SET Enquiry_id_seq
+pg_restore: executing SEQUENCE SET Hero_id_seq
+pg_restore: executing SEQUENCE SET Project_id_seq
+pg_restore: executing SEQUENCE SET Property_id_seq
+pg_restore: executing SEQUENCE SET Service_id_seq
+pg_restore: executing SEQUENCE SET Testimonial_id_seq
+pg_restore: warning: errors ignored on restore: 8
