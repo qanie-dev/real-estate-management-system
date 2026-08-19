@@ -88,7 +88,7 @@ export default function SellPropertyPage() {
             {/* Image */}
             <div className="w-full">
               <Image
-                src="/images/sellbanner.jfif"
+                src="/images/sellbanner.jpg"
                 alt="Sell Property"
                 width={650}
                 height={500}

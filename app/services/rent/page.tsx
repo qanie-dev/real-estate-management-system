@@ -91,7 +91,7 @@ export default function RentPropertyPage() {
             <div className="w-full">
 
               <Image
-                src="/images/rentbanner.jfif"
+                src="/images/rentbanner.jpg"
                 alt="Rent Property"
                 width={650}
                 height={500}

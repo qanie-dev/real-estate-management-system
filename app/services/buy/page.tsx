@@ -91,7 +91,7 @@ export default function BuyPropertyPage() {
             <div className="w-full">
 
               <Image
-                src="/images/buybanner.jfif"
+                src="/images/buybanner.jpg"
                 alt="Buy Property"
                 width={650}
                 height={500}
