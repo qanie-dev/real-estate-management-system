@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import fs from "fs";
-import path from "path";
+import cloudinary from "@/lib/cloudinary";
 
 export async function GET() {
   try {
     const properties = await prisma.property.findMany({
       include: {
-      category: true,
+        category: true,
       },
       orderBy: {
         createdAt: "desc",
@@ -52,26 +51,33 @@ export async function POST(request: Request) {
 
     const imageFile = formData.get("image") as File | null;
 
-    let imagePath = null;
+    let imagePath: string | null = null;
 
-    if (imageFile) {
-      const bytes = await imageFile.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-
-      const uploadDir = path.join(process.cwd(), "public/uploads");
-
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
+    if (imageFile && imageFile.size > 0) {
+      // Check that the file is an image
+      if (!imageFile.type.startsWith("image/")) {
+        return NextResponse.json(
+          {
+            message: "Only image files are allowed",
+          },
+          { status: 400 }
+        );
       }
 
-      const fileName = `${Date.now()}-${imageFile.name}`;
+      // Convert image to base64
+      const bytes = await imageFile.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const base64 = buffer.toString("base64");
 
-      fs.writeFileSync(
-        path.join(uploadDir, fileName),
-        buffer
-      );
+      const dataUri = `data:${imageFile.type};base64,${base64}`;
 
-      imagePath = `/uploads/${fileName}`;
+      // Upload to Cloudinary
+      const result = await cloudinary.uploader.upload(dataUri, {
+        folder: "real-estate/properties",
+        resource_type: "image",
+      });
+
+      imagePath = result.secure_url;
     }
 
     console.log({
@@ -80,7 +86,6 @@ export async function POST(request: Request) {
       price,
       city,
       location,
-      
       categoryId,
       bedrooms,
       bathrooms,
@@ -99,11 +104,10 @@ export async function POST(request: Request) {
         city,
         location,
 
-        
         category: {
-        connect: {
-        id: categoryId,
-        },
+          connect: {
+            id: categoryId,
+          },
         },
 
         bedrooms,

@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-
-
+import cloudinary from "@/lib/cloudinary";
 
 interface Params {
   params: Promise<{
@@ -14,23 +13,33 @@ export async function GET(
   request: Request,
   { params }: Params
 ) {
-  const { id } = await params;
+  try {
+    const { id } = await params;
 
-  const property = await prisma.property.findUnique({
-    where: {
-      id: Number(id),
-    },
-    include: {
-      category: true,
-    },
-  });
+    const property = await prisma.property.findUnique({
+      where: {
+        id: Number(id),
+      },
+      include: {
+        category: true,
+      },
+    });
 
-  return NextResponse.json(property);
+    return NextResponse.json(property);
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      {
+        message: "Error fetching property",
+        error: String(error),
+      },
+      { status: 500 }
+    );
+  }
 }
 
-import { writeFile } from "fs/promises";
-import path from "path";
-
+// UPDATE PROPERTY
 export async function PUT(
   request: Request,
   { params }: Params
@@ -56,21 +65,29 @@ export async function PUT(
 
     const image = formData.get("image") as File | null;
 
+    // Upload new image to Cloudinary if one was selected
     if (image && image.size > 0) {
+      if (!image.type.startsWith("image/")) {
+        return NextResponse.json(
+          {
+            message: "Only image files are allowed",
+          },
+          { status: 400 }
+        );
+      }
+
       const bytes = await image.arrayBuffer();
       const buffer = Buffer.from(bytes);
+      const base64 = buffer.toString("base64");
 
-      const filename = `${Date.now()}-${image.name}`;
+      const dataUri = `data:${image.type};base64,${base64}`;
 
-      const uploadPath = path.join(
-        process.cwd(),
-        "public/uploads",
-        filename
-      );
+      const result = await cloudinary.uploader.upload(dataUri, {
+        folder: "real-estate/properties",
+        resource_type: "image",
+      });
 
-      await writeFile(uploadPath, buffer);
-
-      imagePath = `/uploads/${filename}`;
+      imagePath = result.secure_url;
     }
 
     const property = await prisma.property.update({
@@ -83,24 +100,28 @@ export async function PUT(
         price: Number(price),
         city,
         location,
+
         category: {
-    connect: {
-      id: categoryId,
-    },
-  },
+          connect: {
+            id: categoryId,
+          },
+        },
+
         bedrooms: Number(bedrooms),
         bathrooms: Number(bathrooms),
         area,
         featured,
         status,
 
-        ...(imagePath && { image: imagePath }),
+        ...(imagePath && {
+          image: imagePath,
+        }),
       },
     });
 
     return NextResponse.json(property);
   } catch (error) {
-    console.error(error);
+    console.error("PROPERTY UPDATE ERROR:", error);
 
     return NextResponse.json(
       {
@@ -117,15 +138,27 @@ export async function DELETE(
   request: Request,
   { params }: Params
 ) {
-  const { id } = await params;
+  try {
+    const { id } = await params;
 
-  await prisma.property.delete({
-    where: {
-      id: Number(id),
-    },
-  });
+    await prisma.property.delete({
+      where: {
+        id: Number(id),
+      },
+    });
 
-  return NextResponse.json({
-    message: "Property Deleted",
-  });
+    return NextResponse.json({
+      message: "Property Deleted",
+    });
+  } catch (error) {
+    console.error("PROPERTY DELETE ERROR:", error);
+
+    return NextResponse.json(
+      {
+        message: "Delete failed",
+        error: String(error),
+      },
+      { status: 500 }
+    );
+  }
 }
