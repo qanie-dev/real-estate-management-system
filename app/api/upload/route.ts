@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import cloudinary from "@/lib/cloudinary";
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Allow only images
+    // Only allow images
     if (!file.type.startsWith("image/")) {
       return NextResponse.json(
         { message: "Only image files are allowed" },
@@ -23,33 +22,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Convert file to base64
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create uploads folder if it doesn't exist
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
+    const base64 = buffer.toString("base64");
 
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
+    const dataUri = `data:${file.type};base64,${base64}`;
 
-    // Unique filename
-    const extension = path.extname(file.name);
-
-    const filename = `${Date.now()}-${Math.random()
-      .toString(36)
-      .substring(2)}${extension}`;
-
-    const filepath = path.join(uploadDir, filename);
-
-    fs.writeFileSync(filepath, buffer);
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(dataUri, {
+      folder: "real-estate",
+      resource_type: "image",
+    });
 
     return NextResponse.json({
       success: true,
-      imageUrl: `/uploads/${filename}`,
+      imageUrl: result.secure_url,
+      publicId: result.public_id,
     });
   } catch (error) {
-    console.error(error);
+    console.error("Cloudinary upload error:", error);
 
     return NextResponse.json(
       {

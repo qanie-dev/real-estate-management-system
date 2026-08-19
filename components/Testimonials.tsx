@@ -181,17 +181,13 @@ export default function TestimonialsSection() {
                         <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center flex-shrink-0">
 
                           {item.image ? (
-                            <Image
-                              src={
-                                item.image.startsWith("/")
-                                  ? item.image
-                                  : `/images/${item.image}`
-                              }
-                              alt={item.name}
-                              width={64}
-                              height={64}
-                              className="w-full h-full object-cover"
-                            />
+                          <Image
+                           src={item.image}
+                           alt={item.name}
+                           width={64}
+                           height={64}
+                           className="w-full h-full object-cover"
+                           />
                           ) : (
                             <User
                               size={24}
